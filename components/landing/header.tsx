@@ -2,17 +2,19 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { Menu, X } from "lucide-react";
+import { Menu, Phone, X } from "lucide-react";
 import { Logo } from "@/components/logo";
 import { ThemeToggle } from "@/components/landing/theme-toggle";
+import { CONTACT } from "@/lib/content";
 import { cn } from "@/lib/utils";
 
 const NAV_LINKS = [
-  { href: "#imkoniyatlar", label: "Imkoniyatlar" },
-  { href: "#darslar", label: "Darslar" },
-  { href: "#instruktor", label: "Instruktor" },
-  { href: "#narxlar", label: "Narxlar" },
-  { href: "#faq", label: "FAQ" },
+  { href: "#kurslar", label: "Kurslar" },
+  { href: "#paketlar", label: "Paketlar" },
+  { href: "#jarayon", label: "Jarayon" },
+  { href: "#ilova", label: "Ilova" },
+  { href: "#avtopark", label: "Avtopark" },
+  { href: "#faq", label: "Savollar" },
 ];
 
 export function Header() {
@@ -85,10 +87,17 @@ export function Header() {
           <div className="flex items-center gap-2.5">
             <ThemeToggle />
             <a
-              href="#yuklab"
-              className="btn-sheen hidden items-center gap-2 rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground shadow-lg shadow-primary/25 transition-all hover:-translate-y-0.5 hover:shadow-xl hover:shadow-primary/40 sm:inline-flex"
+              href={CONTACT.phoneHref}
+              className="hidden items-center gap-2 rounded-full border border-border px-4 py-2.5 text-sm font-semibold transition-colors hover:border-primary/40 xl:inline-flex"
             >
-              Bepul boshlash
+              <Phone className="size-3.5 text-primary" />
+              {CONTACT.phone}
+            </a>
+            <a
+              href="#ariza"
+              className="btn-primary btn-sheen hidden px-5 py-2.5 text-sm sm:inline-flex"
+            >
+              Ariza qoldirish
             </a>
             <button
               type="button"
@@ -126,11 +135,19 @@ export function Header() {
             </a>
           ))}
           <a
-            href="#yuklab"
+            href={CONTACT.phoneHref}
             onClick={() => setMenuOpen(false)}
-            className="mt-2 inline-flex items-center justify-center rounded-full bg-primary px-5 py-3 text-sm font-semibold text-primary-foreground shadow-lg shadow-primary/25"
+            className="btn-ghost mt-2 px-5 py-3 text-sm"
           >
-            Bepul boshlash
+            <Phone className="size-4 text-primary" />
+            {CONTACT.phone}
+          </a>
+          <a
+            href="#ariza"
+            onClick={() => setMenuOpen(false)}
+            className="btn-primary mt-2 px-5 py-3 text-sm"
+          >
+            Ariza qoldirish
           </a>
         </nav>
       </div>

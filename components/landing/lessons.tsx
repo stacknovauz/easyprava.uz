@@ -49,7 +49,7 @@ export function Lessons() {
   const secondRow = TOPICS.slice(10);
 
   return (
-    <section id="darslar" className="relative scroll-mt-20 py-24 sm:py-32">
+    <section id="darslar" className="relative scroll-mt-20 overflow-hidden py-24 sm:py-32">
       <div className="absolute right-0 top-1/3 -z-10 size-[440px] rounded-full bg-blue-600/10 blur-[130px]" />
 
       <div className="mx-auto max-w-7xl px-4 sm:px-6">

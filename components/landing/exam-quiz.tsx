@@ -102,7 +102,7 @@ export function ExamQuiz() {
   };
 
   return (
-    <section id="sinov" className="relative scroll-mt-20 py-24 sm:py-32">
+    <section id="sinov" className="relative scroll-mt-20 overflow-hidden py-24 sm:py-32">
       <div className="absolute left-0 top-1/4 -z-10 size-[440px] rounded-full bg-primary/10 blur-[130px]" />
 
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
@@ -113,8 +113,7 @@ export function ExamQuiz() {
             <span className="text-gradient">sinab ko&apos;ring</span>
           </h2>
           <p className="mt-4 text-pretty text-base leading-relaxed text-muted-foreground sm:text-lg">
-            Haqiqiy imtihon savollaridan 3 tasi. Natijangiz qanday bo&apos;lar
-            ekan?
+            Davlat imtihoni savollaridan 3 tasi. Nazariyangiz qay darajada?
           </p>
         </Reveal>
 
@@ -207,10 +206,10 @@ export function ExamQuiz() {
                 </p>
                 <div className="mt-7 flex flex-col gap-3 sm:flex-row">
                   <a
-                    href="#narxlar"
+                    href="#kurslar"
                     className="btn-sheen inline-flex items-center justify-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground shadow-lg shadow-primary/25 transition-all hover:-translate-y-0.5"
                   >
-                    To&apos;liq kursni boshlash
+                    Kursga yozilish
                     <ArrowRight className="size-4" />
                   </a>
                   <button

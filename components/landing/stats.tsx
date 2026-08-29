@@ -1,32 +1,13 @@
-import { BookOpen, ClipboardList, FileQuestion, Timer } from "lucide-react";
+import { Car, GraduationCap, Percent, Users } from "lucide-react";
 import { CountUp } from "@/components/landing/count-up";
 import { Reveal } from "@/components/landing/reveal";
 
+/* Raqamlar — ishga tushirishdan oldin haqiqiy ko'rsatkichlar bilan almashtiring */
 const STATS = [
-  {
-    icon: ClipboardList,
-    value: 20,
-    suffix: "",
-    label: "Imtihon bileti",
-  },
-  {
-    icon: FileQuestion,
-    value: 400,
-    suffix: "",
-    label: "Test savoli",
-  },
-  {
-    icon: BookOpen,
-    value: 20,
-    suffix: "",
-    label: "Nazariy mavzu",
-  },
-  {
-    icon: Timer,
-    value: 25,
-    suffix: "",
-    label: "Daqiqa — real imtihon rejimi",
-  },
+  { icon: GraduationCap, value: 1200, suffix: "+", label: "Guvohnoma olgan bitiruvchi" },
+  { icon: Percent, value: 92, suffix: "%", label: "Birinchi urinishda o'tish" },
+  { icon: Users, value: 18, suffix: "", label: "Tajribali instruktor" },
+  { icon: Car, value: 24, suffix: "", label: "O'quv avtomobili" },
 ];
 
 export function Stats() {

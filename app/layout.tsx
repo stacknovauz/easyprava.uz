@@ -21,24 +21,26 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL("https://easyprava.uz"),
   title: {
-    default: "EasyPrava — Prava imtihoniga onlayn tayyorlaning",
+    default: "EasyPrava — Toshkentdagi haydovchilik o'quv markazi",
     template: "%s | EasyPrava",
   },
   description:
-    "EasyPrava — haydovchilik guvohnomasiga tayyorlanish uchun zamonaviy ilova. 20 ta imtihon bileti, 20 ta nazariy mavzu, real imtihon rejimi va shaxsiy statistika — hammasi bir joyda.",
+    "EasyPrava — Toshkentdagi litsenziyalangan haydovchilik o'quv markazi. A, B, BC, C va D toifalari bo'yicha tayyorlaymiz: amaliy haydash o'z avtodromimizda, nazariya esa o'z ilovamizda bepul. Narxlar 1 200 000 so'mdan, 3 oyga bo'lib to'lash mumkin.",
   keywords: [
-    "prava",
-    "prava imtihoni",
-    "haydovchilik guvohnomasi",
-    "PDD test",
-    "yo'l harakati qoidalari",
     "avtomaktab",
+    "avtomaktab Toshkent",
+    "haydovchilik kurslari",
+    "B toifa narxi",
+    "haydovchilik guvohnomasi",
+    "prava olish",
+    "amaliy haydash",
+    "avtodrom",
     "EasyPrava",
   ],
   openGraph: {
-    title: "EasyPrava — Prava imtihoniga onlayn tayyorlaning",
+    title: "EasyPrava — Toshkentdagi haydovchilik o'quv markazi",
     description:
-      "20 ta imtihon bileti, 20 ta nazariy mavzu, real imtihon rejimi va shaxsiy statistika — hammasi bir ilovada.",
+      "A, B, BC, C va D toifalari bo'yicha to'liq tayyorlov. Amaliyot o'z avtodromimizda, nazariya ilovada bepul. 3 oyga bo'lib to'lash.",
     url: "https://easyprava.uz",
     siteName: "EasyPrava",
     locale: "uz_UZ",
@@ -46,9 +48,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "EasyPrava — Prava imtihoniga onlayn tayyorlaning",
+    title: "EasyPrava — Toshkentdagi haydovchilik o'quv markazi",
     description:
-      "Testlar, darslar va statistika — prava imtihoniga tayyorlanish uchun hammasi bir ilovada.",
+      "A, B, BC, C va D toifalari bo'yicha to'liq tayyorlov — narxlar ochiq, bo'lib to'lash mumkin.",
   },
 };
 
