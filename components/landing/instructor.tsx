@@ -13,7 +13,7 @@ const INSTRUCTOR_FEATURES = [
   {
     icon: Users,
     title: "O'quvchilar ro'yxati",
-    text: "Har bir o'quvchining toifasi (A/B/C) va o'quv jarayoni bir ekranda.",
+    text: "Har bir o'quvchining toifasi va o'quv jarayoni instruktorda bir ekranda.",
   },
   {
     icon: CalendarCheck,
@@ -27,8 +27,8 @@ const INSTRUCTOR_FEATURES = [
   },
   {
     icon: ShieldCheck,
-    title: "Xavfsiz kirish",
-    text: "SMS-kod orqali tezkor va xavfsiz avtorizatsiya — parol yodlash shart emas.",
+    title: "Elektron sertifikat",
+    text: "Bajarilgan har bir amaliy soat tizimga yoziladi va imtihonga yo'llanadi.",
   },
 ];
 
@@ -48,15 +48,15 @@ export function Instructor() {
           {/* left: copy */}
           <div>
             <Reveal>
-              <span className="eyebrow">Instruktorlar uchun</span>
+              <span className="eyebrow">Ichki tizimimiz</span>
               <h2 className="font-heading mt-4 text-balance text-3xl font-bold leading-[1.1] tracking-tight sm:text-[2.75rem]">
-                EasyPrava{" "}
-                <span className="text-gradient">Instruktor</span> — avtomaktablar
-                uchun
+                Instruktorlarimiz{" "}
+                <span className="text-gradient">EasyPrava Instruktor</span>da ishlaydi
               </h2>
               <p className="mt-4 max-w-xl text-pretty text-base leading-relaxed text-muted-foreground sm:text-lg">
-                O&apos;quvchilar, darslar va jadvalni boshqarish uchun alohida
-                ilova. Qog&apos;oz daftarlarni unuting — hammasi telefoningizda.
+                Har bir instruktorimizda maxsus ilova bor: darslar jadvali,
+                o&apos;quvchi progressi va bajarilgan soatlar. Bironta ham
+                darsingiz e&apos;tibordan chetda qolmaydi.
               </p>
             </Reveal>
 
@@ -82,10 +82,10 @@ export function Instructor() {
 
             <Reveal delay={0.3} className="mt-10">
               <a
-                href="#yuklab"
+                href="#ariza"
                 className="inline-flex items-center gap-2 rounded-full border border-primary/40 bg-primary/8 px-6 py-3 text-sm font-semibold text-primary transition-all hover:-translate-y-0.5 hover:bg-primary/15"
               >
-                Instruktor sifatida qo&apos;shilish
+                Instruktor bo&apos;lib ishlash
                 <ArrowRight className="size-4" />
               </a>
             </Reveal>

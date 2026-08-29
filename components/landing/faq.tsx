@@ -3,40 +3,10 @@
 import { useState } from "react";
 import { ChevronDown } from "lucide-react";
 import { Reveal } from "@/components/landing/reveal";
+import { FAQ_ITEMS } from "@/lib/content";
 import { cn } from "@/lib/utils";
 
-const FAQ_ITEMS = [
-  {
-    question: "Ilova bepulmi?",
-    answer:
-      "Ha, boshlash mutlaqo bepul — 3 ta bilet va 5 ta dars ochiq. Barcha imkoniyatlar (biletlar, darslar va statistika) Premium obuna orqali ochiladi.",
-  },
-  {
-    question: "Testlar rasmiy imtihonga mosmi?",
-    answer:
-      "Ha. Biletlar rasmiy imtihon formatida tuzilgan: har bir bilet 20 ta savoldan iborat va 25 daqiqa vaqt beriladi — xuddi haqiqiy imtihondagidek.",
-  },
-  {
-    question: "Ilovani qayerdan yuklab olaman?",
-    answer:
-      "EasyPrava tez orada App Store va Google Play'da paydo bo'ladi. Telegram kanalimizga obuna bo'ling va ilova chiqishi haqida birinchilardan bo'lib xabar oling.",
-  },
-  {
-    question: "Natijalarim saqlanadimi?",
-    answer:
-      "Ha, akkauntingizga kirganingizdan so'ng barcha natijalar va progress bulutda saqlanadi hamda barcha qurilmalaringizda sinxronlanadi.",
-  },
-  {
-    question: "To'lovni qanday amalga oshiraman?",
-    answer:
-      "Payme, Click va bank kartalari orqali to'lash mumkin bo'ladi. Obunani istalgan vaqtda bekor qilish mumkin — hech qanday yashirin to'lov yo'q.",
-  },
-  {
-    question: "EasyPrava Instruktor nima?",
-    answer:
-      "Bu avtomaktab instruktorlari uchun alohida ilova: o'quvchilar ro'yxati, ularning progressi, haftalik dars jadvali va darslarni boshqarish — hammasi bir joyda.",
-  },
-];
+
 
 export function Faq() {
   const [open, setOpen] = useState<number | null>(0);

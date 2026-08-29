@@ -1,17 +1,21 @@
-import { ArrowUp, Mail, Send } from "lucide-react";
+import { ArrowUp, Mail, MapPin, Phone, Send } from "lucide-react";
 import { Logo } from "@/components/logo";
+import { BRANCHES, CONTACT } from "@/lib/content";
 
 const PAGE_LINKS = [
-  { href: "#imkoniyatlar", label: "Imkoniyatlar" },
-  { href: "#darslar", label: "Darslar" },
-  { href: "#sinov", label: "Mini imtihon" },
-  { href: "#narxlar", label: "Narxlar" },
+  { href: "#kurslar", label: "Kurslar va narxlar" },
+  { href: "#paketlar", label: "B toifa paketlari" },
+  { href: "#jarayon", label: "Jarayon" },
+  { href: "#ilova", label: "EasyPrava ilovasi" },
+  { href: "#avtopark", label: "Avtopark" },
   { href: "#faq", label: "Savol-javob" },
 ];
 
 const APP_LINKS = [
-  { href: "#top", label: "EasyPrava — o'quvchilar uchun" },
-  { href: "#instruktor", label: "EasyPrava Instruktor" },
+  { href: "#kurslar", label: "A va A1 toifa" },
+  { href: "#kurslar", label: "B toifa" },
+  { href: "#kurslar", label: "BC va C toifa" },
+  { href: "#kurslar", label: "D toifa" },
 ];
 
 export function Footer() {
@@ -19,12 +23,12 @@ export function Footer() {
     <footer id="aloqa" className="relative scroll-mt-20 overflow-hidden border-t border-border">
       <div className="mx-auto max-w-7xl px-4 pt-16 sm:px-6">
         <div className="grid gap-12 pb-14 md:grid-cols-2 lg:grid-cols-4">
-          <div className="lg:col-span-2">
+          <div>
             <Logo />
             <p className="mt-4 max-w-sm text-sm leading-relaxed text-muted-foreground">
-              EasyPrava — haydovchilik guvohnomasiga tayyorlanish uchun
-              zamonaviy platforma. Testlar, darslar va statistika — hammasi bir
-              joyda.
+              EasyPrava — Toshkentdagi litsenziyalangan haydovchilik o&apos;quv
+              markazi. A, B, BC, C va D toifalari bo&apos;yicha tayyorlaymiz —
+              nazariya o&apos;z ilovamizda, amaliyot o&apos;z avtodromimizda.
             </p>
           </div>
 
@@ -48,7 +52,7 @@ export function Footer() {
 
           <div>
             <h3 className="font-heading text-sm font-bold uppercase tracking-wider text-muted-foreground">
-              Ilovalar va aloqa
+              Toifalar
             </h3>
             <ul className="mt-4 space-y-2.5">
               {APP_LINKS.map((link) => (
@@ -61,26 +65,52 @@ export function Footer() {
                   </a>
                 </li>
               ))}
+
+            </ul>
+          </div>
+          <div>
+            <h3 className="font-heading text-sm font-bold uppercase tracking-wider text-muted-foreground">
+              Aloqa
+            </h3>
+            <ul className="mt-4 space-y-2.5">
               <li>
                 <a
-                  href="https://t.me/easyprava_uz"
+                  href={CONTACT.phoneHref}
+                  className="inline-flex items-center gap-2 text-sm text-muted-foreground transition-colors hover:text-foreground"
+                >
+                  <Phone className="size-3.5 text-primary" />
+                  {CONTACT.phone}
+                </a>
+              </li>
+              <li>
+                <a
+                  href={CONTACT.telegram}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 text-sm text-muted-foreground transition-colors hover:text-foreground"
                 >
                   <Send className="size-3.5 text-primary" />
-                  @easyprava_uz
+                  {CONTACT.telegramHandle}
                 </a>
               </li>
               <li>
                 <a
-                  href="mailto:info@easyprava.uz"
+                  href={`mailto:${CONTACT.email}`}
                   className="inline-flex items-center gap-2 text-sm text-muted-foreground transition-colors hover:text-foreground"
                 >
                   <Mail className="size-3.5 text-primary" />
-                  info@easyprava.uz
+                  {CONTACT.email}
                 </a>
               </li>
+              {BRANCHES.slice(0, 2).map((branch) => (
+                <li
+                  key={branch.name}
+                  className="flex items-start gap-2 text-sm text-muted-foreground"
+                >
+                  <MapPin className="mt-0.5 size-3.5 shrink-0 text-primary" />
+                  {branch.address}
+                </li>
+              ))}
             </ul>
           </div>
         </div>

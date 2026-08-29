@@ -1,11 +1,11 @@
 const WORDS = [
-  "TESTLAR",
-  "BILETLAR",
-  "DARSLAR",
-  "IMTIHON",
-  "PRAVA",
-  "STATISTIKA",
-  "PDD",
+  "A TOIFA",
+  "B TOIFA",
+  "BC TOIFA",
+  "C TOIFA",
+  "D TOIFA",
+  "AVTODROM",
+  "AMALIYOT",
 ];
 
 function Track() {

@@ -1,39 +1,8 @@
 import { Quote, Star } from "lucide-react";
 import { Reveal } from "@/components/landing/reveal";
+import { TESTIMONIALS } from "@/lib/content";
 
-/* Placeholder testimonials — replace with real student reviews before launch */
-const TESTIMONIALS = [
-  {
-    name: "Jasurbek",
-    meta: "Toshkent · B toifa",
-    text: "Bir oy davomida har kuni 2 tadan bilet yechdim. Imtihonda 19/20 — birinchi urinishda o'tdim! Xatolar tahlili eng foydali funksiya ekan.",
-    initials: "JB",
-  },
-  {
-    name: "Madina",
-    meta: "Samarqand · B toifa",
-    text: "Darslar juda sodda tilda yozilgan. Ayniqsa yo'l belgilari mavzulari rasmlar bilan tushunarli. Telefonda istalgan joyda o'qish qulay.",
-    initials: "MA",
-  },
-  {
-    name: "Sardor",
-    meta: "Farg'ona · C toifa",
-    text: "Real imtihon rejimi zo'r — vaqt hisoblagichi bilan mashq qilganim uchun imtihonda umuman hayajonlanmadim.",
-    initials: "SA",
-  },
-  {
-    name: "Nilufar",
-    meta: "Toshkent · B toifa",
-    text: "Statistika bo'limi motivatsiya beradi. Har kuni progressim o'sganini ko'rib, o'qishni tashlagim kelmadi. 2 haftada barcha mavzularni tugatdim.",
-    initials: "NI",
-  },
-  {
-    name: "Bekzod",
-    meta: "Andijon · B toifa",
-    text: "Avtomaktabdagi darslardan tashqari EasyPrava'da mashq qildim. Guruhimizda birinchilardan bo'lib imtihondan o'tdim.",
-    initials: "BE",
-  },
-];
+
 
 export function Testimonials() {
   return (
@@ -42,7 +11,7 @@ export function Testimonials() {
         <Reveal className="mx-auto max-w-2xl text-center">
           <span className="eyebrow">Fikrlar</span>
           <h2 className="font-heading mt-4 text-balance text-3xl font-bold leading-[1.1] tracking-tight sm:text-[2.75rem]">
-            O&apos;quvchilarimiz <span className="text-gradient">nima deydi?</span>
+            Bitiruvchilarimiz <span className="text-gradient">nima deydi?</span>
           </h2>
         </Reveal>
       </div>
