@@ -24,7 +24,7 @@ export function Footer() {
       <div className="mx-auto max-w-7xl px-4 pt-16 sm:px-6">
         <div className="grid gap-12 pb-14 md:grid-cols-2 lg:grid-cols-4">
           <div>
-            <Logo />
+            <Logo className="h-7 sm:h-8" />
             <p className="mt-4 max-w-sm text-sm leading-relaxed text-muted-foreground">
               EasyPrava — Toshkentdagi litsenziyalangan haydovchilik o&apos;quv
               markazi. A, B, BC, C va D toifalari bo&apos;yicha tayyorlaymiz —
@@ -115,11 +115,9 @@ export function Footer() {
           </div>
         </div>
 
-        {/* giant watermark wordmark */}
-        <div aria-hidden="true" className="select-none pb-2 text-center">
-          <span className="text-gradient-animated font-heading block whitespace-nowrap text-[clamp(2.5rem,11.5vw,10rem)] font-extrabold leading-[0.9] tracking-[-0.04em]">
-            EASYPRAVA
-          </span>
+        {/* giant watermark — the real lockup, not a look-alike typeface */}
+        <div aria-hidden="true" className="select-none px-2 pb-6 pt-2 opacity-[0.09]">
+          <Logo label={null} className="h-auto w-full sm:h-auto" />
         </div>
 
         <div className="flex flex-col items-center justify-between gap-4 border-t border-border py-6 sm:flex-row">

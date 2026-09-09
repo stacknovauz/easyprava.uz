@@ -50,8 +50,8 @@ export function Instructor() {
             <Reveal>
               <span className="eyebrow">Ichki tizimimiz</span>
               <h2 className="font-heading mt-4 text-balance text-3xl font-bold leading-[1.1] tracking-tight sm:text-[2.75rem]">
-                Instruktorlarimiz{" "}
-                <span className="text-gradient">EasyPrava Instruktor</span>da ishlaydi
+                <span className="text-gradient">Instruktorlarimiz</span>{" "}
+                EasyPrava Instruktor&apos;da ishlaydi
               </h2>
               <p className="mt-4 max-w-xl text-pretty text-base leading-relaxed text-muted-foreground sm:text-lg">
                 Har bir instruktorimizda maxsus ilova bor: darslar jadvali,

@@ -69,7 +69,7 @@ export function Header() {
       >
         <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6">
           <Link href="#top" aria-label="EasyPrava — bosh sahifa">
-            <Logo />
+            <Logo label={null} className="h-5 sm:h-6 lg:h-7" />
           </Link>
 
           <nav className="hidden items-center gap-1 lg:flex">

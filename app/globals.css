@@ -43,6 +43,7 @@
   --color-grad-a: var(--grad-a);
   --color-grad-b: var(--grad-b);
   --color-grad-c: var(--grad-c);
+  --color-brand-yellow: var(--brand-yellow);
   --radius-sm: calc(var(--radius) * 0.6);
   --radius-md: calc(var(--radius) * 0.8);
   --radius-lg: var(--radius);
@@ -89,6 +90,7 @@
   --grad-a: #60a5fa;
   --grad-b: #1e6fe8;
   --grad-c: #1d4ed8;
+  --brand-yellow: #f1b614;
 }
 
 .dark {
@@ -127,6 +129,7 @@
   --grad-a: #93c5fd;
   --grad-b: #4d8df0;
   --grad-c: #2563eb;
+  --brand-yellow: #f1b614;
 }
 
 @layer base {
@@ -264,17 +267,6 @@
 }
 
 /* Preloader keyframes */
-@keyframes pl-letter-rise {
-  from {
-    transform: translateY(110%);
-    opacity: 0;
-  }
-  to {
-    transform: translateY(0);
-    opacity: 1;
-  }
-}
-
 @keyframes pl-bar-fill {
   from {
     transform: scaleX(0);
@@ -722,17 +714,6 @@ html[data-intro-seen="1"] .pl-root {
 
 .pl-mark {
   animation: pl-mark-in 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
-}
-
-.pl-word {
-  display: flex;
-  overflow: hidden;
-}
-
-.pl-letter {
-  display: inline-block;
-  animation: pl-letter-rise 0.4s cubic-bezier(0.22, 1, 0.36, 1) both;
-  animation-delay: calc(0.08s + var(--i) * 0.035s);
 }
 
 .pl-bar {

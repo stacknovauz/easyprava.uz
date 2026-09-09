@@ -1,37 +1,44 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# easyprava.uz
 
-## Getting Started
+Landing page for **EasyPrava** — a licensed driving school (o'quv markaz) in Tashkent that
+prepares students for the A1, A, B, BC, C and D licence categories, and ships its own
+student and instructor mobile apps.
 
-First, run the development server:
+## Stack
+
+- Next.js 16 (App Router) — see `AGENTS.md`, this version has breaking changes vs older docs
+- Tailwind CSS 4 (CSS-first config in `app/globals.css`)
+- shadcn/ui (`radix-luma` style), lucide-react icons
+- Fonts: Inter (body), Sora (headings), Geist Mono
+
+## Where things live
+
+| What | Where |
+|---|---|
+| Prices, courses, FAQ, testimonials, branches, contacts | `lib/content.ts` |
+| Page sections | `components/landing/` |
+| Brand marks (traced from `public/logo.jpg`) | `components/logo.tsx` |
+| Design tokens (`--primary`, `--brand-yellow`, …) | `app/globals.css` |
+| Favicon / apple icon / OG image | `app/icon.svg`, `app/apple-icon.png`, `app/opengraph-image.png` |
+| Enrolment form endpoint | `app/api/lead/route.ts` |
+
+Edit copy and pricing in `lib/content.ts` — not in the section components.
+
+## Development
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm run dev     # http://localhost:3000
+npm run lint
+npm run build
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Enrolment leads
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+`POST /api/lead` forwards submissions to Telegram. Set these in `.env.local`
+(and in the hosting provider's environment variables) or leads are only written
+to the server log:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
-# easyprava.uz
+```
+TELEGRAM_BOT_TOKEN=...   # from @BotFather
+TELEGRAM_CHAT_ID=...     # chat/channel that receives the leads
+```
