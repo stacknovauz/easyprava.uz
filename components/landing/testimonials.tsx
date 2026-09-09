@@ -1,17 +1,23 @@
 import { Quote, Star } from "lucide-react";
 import { Reveal } from "@/components/landing/reveal";
-import { TESTIMONIALS } from "@/lib/content";
+import type { Dictionary } from "@/lib/i18n/types";
 
+function initialsOf(name: string) {
+  const parts = name.trim().split(/\s+/);
+  const raw =
+    parts.length > 1 ? `${parts[0][0]}${parts[1][0]}` : name.trim().slice(0, 2);
+  return raw.toUpperCase();
+}
 
-
-export function Testimonials() {
+export function Testimonials({ dict }: { dict: Dictionary }) {
   return (
     <section className="relative py-24 sm:py-32">
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
         <Reveal className="mx-auto max-w-2xl text-center">
-          <span className="eyebrow">Fikrlar</span>
+          <span className="eyebrow">{dict.testimonials.eyebrow}</span>
           <h2 className="font-heading mt-4 text-balance text-3xl font-bold leading-[1.1] tracking-tight sm:text-[2.75rem]">
-            Bitiruvchilarimiz <span className="text-gradient">nima deydi?</span>
+            {dict.testimonials.title}{" "}
+            <span className="text-gradient">{dict.testimonials.titleAccent}</span>
           </h2>
         </Reveal>
       </div>
@@ -20,10 +26,10 @@ export function Testimonials() {
         <div
           tabIndex={0}
           role="region"
-          aria-label="O'quvchilar fikrlari"
+          aria-label={dict.testimonials.regionAria}
           className="mt-12 flex snap-x snap-mandatory gap-5 overflow-x-auto px-4 pb-4 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring sm:px-6 lg:px-[max(1rem,calc((100vw-80rem)/2+1.5rem))] [scrollbar-width:thin]"
         >
-          {TESTIMONIALS.map((t) => (
+          {dict.testimonials.items.map((t) => (
             <article
               key={t.name}
               className="glass-card relative w-[85vw] shrink-0 snap-start rounded-3xl p-7 sm:w-[380px]"
@@ -42,7 +48,7 @@ export function Testimonials() {
               </p>
               <div className="mt-6 flex items-center gap-3">
                 <span className="font-heading flex size-11 items-center justify-center rounded-2xl bg-gradient-to-br from-[#1e6fe8] to-[#1d4ed8] text-sm font-bold text-white ring-2 ring-primary/25 ring-offset-2 ring-offset-background">
-                  {t.initials}
+                  {initialsOf(t.name)}
                 </span>
                 <div>
                   <p className="text-sm font-semibold">{t.name}</p>

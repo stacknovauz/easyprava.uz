@@ -1,22 +1,32 @@
 import { Clock, MapPin, Phone, Send } from "lucide-react";
 import { LeadForm } from "@/components/landing/lead-form";
 import { Reveal } from "@/components/landing/reveal";
-import { BRANCHES, CONTACT } from "@/lib/content";
+import { BRANCHES, CONTACT, COURSES } from "@/lib/content";
+import type { Dictionary } from "@/lib/i18n/types";
 
-export function Enroll() {
+/** No dictionary key exists for the work hours yet — kept as-is. */
+export function Enroll({ dict }: { dict: Dictionary }) {
+  const courses = COURSES.map((course) => ({
+    code: course.code,
+    title: dict.courses.items[course.code].title,
+  }));
+  const branchNames = BRANCHES.map(
+    (branch) => dict.enroll.branches[branch.id].name
+  );
+
   return (
     <section id="ariza" className="relative scroll-mt-20 py-24 sm:py-32 overflow-hidden">
       <div className="glow-blob left-1/2 top-10 size-[560px] -translate-x-1/2 bg-primary/12" />
 
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
         <Reveal className="mx-auto max-w-2xl text-center">
-          <span className="eyebrow">Ariza qoldirish</span>
+          <span className="eyebrow">{dict.enroll.eyebrow}</span>
           <h2 className="font-heading mt-4 text-balance text-3xl font-bold leading-[1.1] tracking-tight sm:text-[2.75rem]">
-            Keling, <span className="text-gradient">boshlaymiz</span>
+            {dict.enroll.title}{" "}
+            <span className="text-gradient">{dict.enroll.titleAccent}</span>
           </h2>
           <p className="mt-4 text-pretty text-base leading-relaxed text-muted-foreground sm:text-lg">
-            Formani to&apos;ldiring — 15 daqiqa ichida qo&apos;ng&apos;iroq qilib,
-            sizga mos toifa, filial va jadvalni birga tanlaymiz.
+            {dict.enroll.lead}
           </p>
         </Reveal>
 
@@ -25,7 +35,7 @@ export function Enroll() {
           <div className="space-y-4">
             <Reveal>
               <div className="glass-card rounded-3xl p-6 sm:p-7">
-                <h3 className="font-heading text-lg font-bold">Tezkor aloqa</h3>
+                <h3 className="font-heading text-lg font-bold">{dict.enroll.quickTitle}</h3>
                 <div className="mt-5 space-y-3">
                   <a
                     href={CONTACT.phoneHref}
@@ -36,7 +46,7 @@ export function Enroll() {
                     </span>
                     <div>
                       <p className="text-sm font-semibold">{CONTACT.phone}</p>
-                      <p className="text-xs text-muted-foreground">{CONTACT.workHours}</p>
+                      <p className="text-xs text-muted-foreground">{dict.enroll.workHours}</p>
                     </div>
                   </a>
                   <a
@@ -51,7 +61,7 @@ export function Enroll() {
                     <div>
                       <p className="text-sm font-semibold">{CONTACT.telegramHandle}</p>
                       <p className="text-xs text-muted-foreground">
-                        Telegram orqali yozing
+                        {dict.enroll.telegramSub}
                       </p>
                     </div>
                   </a>
@@ -61,20 +71,22 @@ export function Enroll() {
 
             <Reveal delay={0.1}>
               <div className="glass-card rounded-3xl p-6 sm:p-7">
-                <h3 className="font-heading text-lg font-bold">Filiallarimiz</h3>
+                <h3 className="font-heading text-lg font-bold">{dict.enroll.branchesTitle}</h3>
                 <ul className="mt-5 space-y-4">
-                  {BRANCHES.map((branch) => (
-                    <li key={branch.name} className="flex gap-3">
+                  {BRANCHES.map((branch) => {
+                    const info = dict.enroll.branches[branch.id];
+                    return (
+                    <li key={branch.id} className="flex gap-3">
                       <span className="mt-0.5 flex size-8 shrink-0 items-center justify-center rounded-lg bg-primary/12 text-primary">
                         <MapPin className="size-4" />
                       </span>
                       <div>
-                        <p className="text-sm font-semibold">{branch.name}</p>
+                        <p className="text-sm font-semibold">{info.name}</p>
                         <p className="mt-0.5 text-xs leading-relaxed text-muted-foreground">
-                          {branch.address}
+                          {info.address}
                         </p>
                         <p className="mt-1 flex items-center gap-3 text-[11px] text-muted-foreground">
-                          <span className="text-primary">{branch.landmark}</span>
+                          <span className="text-primary">{info.landmark}</span>
                           <span className="inline-flex items-center gap-1">
                             <Clock className="size-3" />
                             {branch.hours}
@@ -82,7 +94,8 @@ export function Enroll() {
                         </p>
                       </div>
                     </li>
-                  ))}
+                    );
+                  })}
                 </ul>
               </div>
             </Reveal>
@@ -90,7 +103,12 @@ export function Enroll() {
 
           {/* right: form */}
           <Reveal delay={0.15}>
-            <LeadForm variant="full" />
+            <LeadForm
+              variant="full"
+              dict={dict.leadForm}
+              courses={courses}
+              branches={branchNames}
+            />
           </Reveal>
         </div>
       </div>

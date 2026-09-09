@@ -1,17 +1,9 @@
-const WORDS = [
-  "A TOIFA",
-  "B TOIFA",
-  "BC TOIFA",
-  "C TOIFA",
-  "D TOIFA",
-  "AVTODROM",
-  "AMALIYOT",
-];
+import type { Dictionary } from "@/lib/i18n/types";
 
-function Track() {
+function Track({ words }: { words: string[] }) {
   return (
     <div className="flex shrink-0 items-center">
-      {WORDS.map((word, i) => (
+      {words.map((word, i) => (
         <span key={word} className="flex items-center">
           <span
             className={
@@ -28,15 +20,15 @@ function Track() {
   );
 }
 
-export function WordMarquee() {
+export function WordMarquee({ dict }: { dict: Dictionary }) {
   return (
     <section aria-hidden="true" className="marquee py-10 sm:py-14">
       <div
         className="marquee-track"
         style={{ "--marquee-duration": "30s" } as React.CSSProperties}
       >
-        <Track />
-        <Track />
+        <Track words={dict.marquee} />
+        <Track words={dict.marquee} />
       </div>
     </section>
   );

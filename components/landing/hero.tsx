@@ -1,22 +1,11 @@
 import { ArrowRight, BadgeCheck, Car, Phone, Sparkles } from "lucide-react";
 import { LeadForm } from "@/components/landing/lead-form";
-import { CONTACT } from "@/lib/content";
+import { BRANCHES, CONTACT, COURSES } from "@/lib/content";
+import type { Dictionary } from "@/lib/i18n/types";
 import { cn } from "@/lib/utils";
 
-const HEADLINE: { word: string; gradient?: boolean }[] = [
-  { word: "Haydovchilik" },
-  { word: "guvohnomangizni" },
-  { word: "3", gradient: true },
-  { word: "oyda", gradient: true },
-  { word: "qo'lga" },
-  { word: "kiriting" },
-];
-
-const TRUST = [
-  { icon: BadgeCheck, label: "Litsenziyalangan o'quv markaz" },
-  { icon: Car, label: "O'z avtodromimiz" },
-  { icon: Sparkles, label: "Nazariya ilovada — bepul" },
-];
+/** Icons for `dict.hero.trust`, in the same order. */
+const TRUST_ICONS = [BadgeCheck, Car, Sparkles];
 
 const PARTICLES = [
   { left: "6%", top: "22%", size: 4, duration: "7s", delay: "0s" },
@@ -28,7 +17,13 @@ const PARTICLES = [
   { left: "94%", top: "72%", size: 3, duration: "7s", delay: "2.6s" },
 ];
 
-export function Hero() {
+export function Hero({ dict }: { dict: Dictionary }) {
+  const courses = COURSES.map((c) => ({
+    code: c.code,
+    title: dict.courses.items[c.code].title,
+  }));
+  const branches = BRANCHES.map((b) => dict.enroll.branches[b.id].name);
+
   return (
     <section
       id="top"
@@ -67,17 +62,20 @@ export function Hero() {
               <span className="absolute inline-flex size-full animate-ping rounded-full bg-primary opacity-60" />
               <span className="relative inline-flex size-2 rounded-full bg-primary" />
             </span>
-            Toshkentdagi zamonaviy avtomaktab
+            {dict.hero.badge}
           </span>
 
           <h1 className="font-heading mt-6 text-balance text-[2.4rem] font-extrabold leading-[1.06] tracking-tight sm:text-5xl lg:text-[3.5rem]">
-            {HEADLINE.map((item, i) => (
+            {dict.hero.headline.map((word, i) => (
               <span key={i} className="word-mask mr-[0.26em] last:mr-0">
                 <span
-                  className={cn("word-rise", item.gradient && "text-gradient-animated")}
+                  className={cn(
+                    "word-rise",
+                    dict.hero.headlineAccent.includes(i) && "text-gradient-animated"
+                  )}
                   style={{ "--d": `${0.95 + i * 0.07}s` } as React.CSSProperties}
                 >
-                  {item.word}
+                  {word}
                 </span>
               </span>
             ))}
@@ -87,9 +85,7 @@ export function Hero() {
             className="rise-in mx-auto mt-6 max-w-xl text-pretty text-base leading-relaxed text-muted-foreground sm:text-lg lg:mx-0"
             style={{ "--d": "1.5s" } as React.CSSProperties}
           >
-            EasyPrava — A, B, BC, C va D toifalari bo&apos;yicha to&apos;liq
-            tayyorlaydigan o&apos;quv markaz. Amaliy haydashni biz bilan o&apos;tasiz,
-            nazariyani esa o&apos;z ilovamizda bepul o&apos;rganasiz.
+            {dict.hero.lead}
           </p>
 
           <div
@@ -97,7 +93,7 @@ export function Hero() {
             style={{ "--d": "1.65s" } as React.CSSProperties}
           >
             <a href="#kurslar" className="btn-primary btn-sheen w-full px-7 py-3.5 text-sm sm:w-auto">
-              Kurslar va narxlar
+              {dict.hero.ctaCourses}
               <ArrowRight className="size-4" />
             </a>
             <a href={CONTACT.phoneHref} className="btn-ghost w-full px-7 py-3.5 text-sm sm:w-auto">
@@ -110,15 +106,18 @@ export function Hero() {
             className="rise-in mt-9 flex flex-wrap items-center justify-center gap-x-6 gap-y-3 lg:justify-start"
             style={{ "--d": "1.8s" } as React.CSSProperties}
           >
-            {TRUST.map((item) => (
-              <li
-                key={item.label}
-                className="flex items-center gap-2 text-sm text-muted-foreground"
-              >
-                <item.icon className="size-4 shrink-0 text-primary" />
-                {item.label}
-              </li>
-            ))}
+            {dict.hero.trust.map((label, i) => {
+              const Icon = TRUST_ICONS[i];
+              return (
+                <li
+                  key={label}
+                  className="flex items-center gap-2 text-sm text-muted-foreground"
+                >
+                  <Icon className="size-4 shrink-0 text-primary" />
+                  {label}
+                </li>
+              );
+            })}
           </ul>
         </div>
 
@@ -128,7 +127,7 @@ export function Hero() {
           style={{ "--d": "1.15s" } as React.CSSProperties}
         >
           <div className="animate-pulse-glow absolute -inset-6 -z-10 rounded-[3rem] bg-primary/12 blur-3xl" />
-          <LeadForm />
+          <LeadForm dict={dict.leadForm} courses={courses} branches={branches} />
         </div>
       </div>
     </section>

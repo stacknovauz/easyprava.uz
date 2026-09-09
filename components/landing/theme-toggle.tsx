@@ -16,7 +16,13 @@ function getIsDark() {
   return document.documentElement.classList.contains("dark");
 }
 
-export function ThemeToggle() {
+export function ThemeToggle({
+  toDark,
+  toLight,
+}: {
+  toDark: string;
+  toLight: string;
+}) {
   // SSR renders the dark icon state (the default theme)
   const dark = useSyncExternalStore(subscribe, getIsDark, () => true);
 
@@ -32,7 +38,7 @@ export function ThemeToggle() {
     <button
       type="button"
       onClick={toggle}
-      aria-label={dark ? "Kunduzgi rejimga o'tish" : "Tungi rejimga o'tish"}
+      aria-label={dark ? toLight : toDark}
       aria-pressed={dark}
       className="relative flex size-9 items-center justify-center rounded-full border border-border bg-card/50 text-muted-foreground backdrop-blur transition-colors hover:border-primary/40 hover:text-foreground"
     >

@@ -2,18 +2,30 @@
 
 import { useState } from "react";
 import { ArrowRight, Check, Loader2, Phone, Send } from "lucide-react";
-import { CONTACT, COURSES, BRANCHES } from "@/lib/content";
+import { CONTACT } from "@/lib/content";
+import type { Dictionary } from "@/lib/i18n/types";
 import { cn } from "@/lib/utils";
 
 type Status = "idle" | "sending" | "done" | "error";
 
 type LeadFormProps = {
+  dict: Dictionary["leadForm"];
+  /** Course codes joined to their translated titles. */
+  courses: { code: string; title: string }[];
+  /** Branch names, already translated. */
+  branches: string[];
   /** compact = hero variant (3 fields), full = enrollment section */
   variant?: "compact" | "full";
   className?: string;
 };
 
-export function LeadForm({ variant = "compact", className }: LeadFormProps) {
+export function LeadForm({
+  dict,
+  courses,
+  branches,
+  variant = "compact",
+  className,
+}: LeadFormProps) {
   const [status, setStatus] = useState<Status>("idle");
   const [error, setError] = useState("");
 
@@ -30,12 +42,12 @@ export function LeadForm({ variant = "compact", className }: LeadFormProps) {
     };
 
     if (payload.name.trim().length < 2) {
-      setError("Ismingizni to'liq yozing");
+      setError(dict.errorName);
       setStatus("error");
       return;
     }
     if (payload.phone.replace(/\D/g, "").length < 9) {
-      setError("Telefon raqamini to'liq kiriting");
+      setError(dict.errorPhone);
       setStatus("error");
       return;
     }
@@ -53,7 +65,7 @@ export function LeadForm({ variant = "compact", className }: LeadFormProps) {
       form.reset();
     } catch {
       setStatus("error");
-      setError("Yuborishda xatolik. Iltimos, telefon orqali bog'laning.");
+      setError(dict.errorSend);
     }
   };
 
@@ -68,10 +80,9 @@ export function LeadForm({ variant = "compact", className }: LeadFormProps) {
         <span className="flex size-14 items-center justify-center rounded-full bg-success/12 text-success">
           <Check className="size-7" />
         </span>
-        <h3 className="font-heading mt-5 text-xl font-bold">Arizangiz qabul qilindi!</h3>
+        <h3 className="font-heading mt-5 text-xl font-bold">{dict.successTitle}</h3>
         <p className="mt-2 max-w-xs text-sm leading-relaxed text-muted-foreground">
-          15 daqiqa ichida qo&apos;ng&apos;iroq qilamiz va sizga mos toifa hamda
-          jadvalni birga tanlaymiz.
+          {dict.successText}
         </p>
         <a
           href={CONTACT.telegram}
@@ -80,14 +91,14 @@ export function LeadForm({ variant = "compact", className }: LeadFormProps) {
           className="btn-ghost mt-6 px-5 py-2.5 text-sm"
         >
           <Send className="size-4 text-primary" />
-          Telegram&apos;da yozish
+          {dict.successTelegram}
         </a>
         <button
           type="button"
           onClick={() => setStatus("idle")}
           className="mt-3 text-xs text-muted-foreground underline underline-offset-4"
         >
-          Yana ariza qoldirish
+          {dict.successAgain}
         </button>
       </div>
     );
@@ -107,25 +118,23 @@ export function LeadForm({ variant = "compact", className }: LeadFormProps) {
       <div className="flex items-start justify-between gap-4">
         <div>
           <h3 className="font-heading text-lg font-bold">
-            {isFull ? "Kursga yozilish" : "Bepul konsultatsiya"}
+            {isFull ? dict.titleFull : dict.titleCompact}
           </h3>
-          <p className="mt-1 text-sm text-muted-foreground">
-            15 daqiqa ichida bog&apos;lanamiz
-          </p>
+          <p className="mt-1 text-sm text-muted-foreground">{dict.subtitle}</p>
         </div>
         <a
           href={CONTACT.phoneHref}
           className="hidden shrink-0 items-center gap-2 rounded-full border border-border px-3 py-2 text-xs font-semibold transition-colors hover:border-primary/40 sm:inline-flex"
         >
           <Phone className="size-3.5 text-primary" />
-          Qo&apos;ng&apos;iroq
+          {dict.callShort}
         </a>
       </div>
 
       <div className="mt-5 space-y-3">
         <div>
           <label htmlFor={`name-${variant}`} className="sr-only">
-            Ismingiz
+            {dict.name}
           </label>
           <input
             id={`name-${variant}`}
@@ -133,14 +142,14 @@ export function LeadForm({ variant = "compact", className }: LeadFormProps) {
             type="text"
             autoComplete="name"
             required
-            placeholder="Ismingiz"
+            placeholder={dict.name}
             className="field"
           />
         </div>
 
         <div>
           <label htmlFor={`phone-${variant}`} className="sr-only">
-            Telefon raqamingiz
+            {dict.phone}
           </label>
           <input
             id={`phone-${variant}`}
@@ -150,22 +159,24 @@ export function LeadForm({ variant = "compact", className }: LeadFormProps) {
             autoComplete="tel"
             required
             defaultValue="+998 "
-            placeholder="+998 90 123 45 67"
+            placeholder={CONTACT.phone}
             className="field"
           />
         </div>
 
         <div>
           <label htmlFor={`course-${variant}`} className="sr-only">
-            Qaysi toifa
+            {dict.course}
           </label>
           <select id={`course-${variant}`} name="course" className="field" defaultValue="B">
-            {COURSES.map((c) => (
+            {courses.map((c) => (
               <option key={c.code} value={c.code}>
-                {c.code} toifa — {c.title}
+                {dict.courseOption
+                  .replace("{code}", c.code)
+                  .replace("{title}", c.title)}
               </option>
             ))}
-            <option value="Bilmayman">Hali tanlamadim — maslahat kerak</option>
+            <option value="Bilmayman">{dict.courseUnsure}</option>
           </select>
         </div>
 
@@ -173,25 +184,25 @@ export function LeadForm({ variant = "compact", className }: LeadFormProps) {
           <>
             <div>
               <label htmlFor="branch-full" className="sr-only">
-                Filial
+                {dict.branch}
               </label>
-              <select id="branch-full" name="branch" className="field" defaultValue={BRANCHES[0].name}>
-                {BRANCHES.map((b) => (
-                  <option key={b.name} value={b.name}>
-                    {b.name}
+              <select id="branch-full" name="branch" className="field" defaultValue={branches[0]}>
+                {branches.map((b) => (
+                  <option key={b} value={b}>
+                    {b}
                   </option>
                 ))}
               </select>
             </div>
             <div>
               <label htmlFor="comment-full" className="sr-only">
-                Izoh
+                {dict.comment}
               </label>
               <textarea
                 id="comment-full"
                 name="comment"
                 rows={3}
-                placeholder="Izoh — masalan: kechqurun qulay, ayol instruktor kerak"
+                placeholder={dict.comment}
                 className="field resize-none"
               />
             </div>
@@ -213,18 +224,18 @@ export function LeadForm({ variant = "compact", className }: LeadFormProps) {
         {status === "sending" ? (
           <>
             <Loader2 className="size-4 animate-spin" />
-            Yuborilmoqda...
+            {dict.sending}
           </>
         ) : (
           <>
-            Ariza qoldirish
+            {dict.submit}
             <ArrowRight className="size-4" />
           </>
         )}
       </button>
 
       <p className="mt-3 text-center text-xs leading-relaxed text-muted-foreground">
-        Ma&apos;lumotlaringiz faqat siz bilan bog&apos;lanish uchun ishlatiladi
+        {dict.privacy}
       </p>
     </form>
   );

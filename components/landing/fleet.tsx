@@ -2,14 +2,15 @@ import { Bike, Bus, Car, Fuel, GraduationCap, Settings2, Truck } from "lucide-re
 import { Reveal } from "@/components/landing/reveal";
 import { TiltCard } from "@/components/landing/tilt-card";
 import { FLEET, INSTRUCTORS } from "@/lib/content";
+import type { Dictionary } from "@/lib/i18n/types";
 
 const FLEET_ICONS: Record<string, typeof Car> = {
-  "A toifa": Bike,
-  "C toifa": Truck,
-  "D toifa": Bus,
+  A: Bike,
+  C: Truck,
+  D: Bus,
 };
 
-export function Fleet() {
+export function Fleet({ dict }: { dict: Dictionary }) {
   const totalCars = FLEET.reduce((sum, item) => sum + item.count, 0);
 
   return (
@@ -19,14 +20,13 @@ export function Fleet() {
           {/* fleet */}
           <div>
             <Reveal>
-              <span className="eyebrow">Avtopark</span>
+              <span className="eyebrow">{dict.fleet.eyebrow}</span>
               <h2 className="font-heading mt-4 text-balance text-3xl font-bold leading-[1.1] tracking-tight sm:text-4xl">
-                {totalCars} ta o&apos;quv{" "}
-                <span className="text-gradient">avtomobili</span>
+                {totalCars} {dict.fleet.carsWord}{" "}
+                <span className="text-gradient">{dict.fleet.titleAccent}</span>
               </h2>
               <p className="mt-4 max-w-lg text-pretty text-base leading-relaxed text-muted-foreground">
-                Barchasi ikki tomonlama boshqaruvli va sug&apos;urtalangan.
-                Mexanika ham, avtomat korobka ham bor.
+                {dict.fleet.lead}
               </p>
             </Reveal>
 
@@ -34,18 +34,20 @@ export function Fleet() {
               {FLEET.map((car, i) => {
                 const Icon = FLEET_ICONS[car.category] ?? Car;
                 return (
-                <Reveal key={car.model} delay={i * 0.07}>
+                <Reveal key={car.id} delay={i * 0.07}>
                   <div className="glass-card flex items-center gap-4 rounded-2xl p-4">
                     <span className="flex size-11 shrink-0 items-center justify-center rounded-xl bg-primary/12 text-primary">
                       <Icon className="size-5" />
                     </span>
                     <div className="min-w-0 flex-1">
-                      <p className="truncate text-sm font-semibold">{car.model}</p>
-                      <p className="text-xs text-muted-foreground">{car.category}</p>
+                      <p className="truncate text-sm font-semibold">{dict.fleet.models[car.id]}</p>
+                      <p className="text-xs text-muted-foreground">{dict.fleet.categoryLabel[car.category]}</p>
                     </div>
                     <span className="hidden items-center gap-1.5 rounded-full bg-muted px-3 py-1 text-[11px] font-medium text-muted-foreground sm:inline-flex">
                       <Settings2 className="size-3" />
-                      {car.type}
+                      {car.transmission === "manual"
+                        ? dict.fleet.manual
+                        : dict.fleet.automatic}
                     </span>
                     <span className="font-heading text-sm font-bold text-primary">
                       ×{car.count}
@@ -59,7 +61,7 @@ export function Fleet() {
             <Reveal delay={0.2} className="mt-6">
               <p className="flex items-center gap-2 text-xs text-muted-foreground">
                 <Fuel className="size-3.5 text-primary" />
-                Yoqilg&apos;i xarajati kurs narxiga kiritilgan
+                {dict.fleet.fuelNote}
               </p>
             </Reveal>
           </div>
@@ -67,41 +69,44 @@ export function Fleet() {
           {/* instructors */}
           <div>
             <Reveal>
-              <span className="eyebrow">Instruktorlar</span>
+              <span className="eyebrow">{dict.fleet.instructorsEyebrow}</span>
               <h2 className="font-heading mt-4 text-balance text-3xl font-bold leading-[1.1] tracking-tight sm:text-4xl">
-                Sizni <span className="text-gradient">tajribali usta</span> o&apos;rgatadi
+                {dict.fleet.instructorsTitle}{" "}
+                <span className="text-gradient">{dict.fleet.instructorsTitleAccent}</span>
               </h2>
               <p className="mt-4 max-w-lg text-pretty text-base leading-relaxed text-muted-foreground">
-                Har bir instruktorimiz rasmiy guvohnomaga ega va o&apos;z
-                o&apos;quvchilarining natijasi uchun javob beradi.
+                {dict.fleet.instructorsLead}
               </p>
             </Reveal>
 
             <div className="mt-8 grid gap-4 sm:grid-cols-2">
-              {INSTRUCTORS.map((person, i) => (
-                <Reveal key={person.name} delay={(i % 2) * 0.1}>
+              {INSTRUCTORS.map((person, i) => {
+                const info = dict.fleet.instructors[person.id];
+                return (
+                <Reveal key={person.id} delay={(i % 2) * 0.1}>
                   <TiltCard className="glass-card h-full rounded-2xl p-5">
                     <div className="flex items-center gap-3">
                       <span className="font-heading flex size-12 items-center justify-center rounded-2xl bg-gradient-to-br from-[#1e6fe8] to-[#1d4ed8] text-sm font-bold text-white">
                         {person.initials}
                       </span>
                       <div className="min-w-0">
-                        <p className="truncate text-sm font-semibold">{person.name}</p>
-                        <p className="text-xs text-muted-foreground">{person.category}</p>
+                        <p className="truncate text-sm font-semibold">{info.name}</p>
+                        <p className="text-xs text-muted-foreground">{info.categories}</p>
                       </div>
                     </div>
                     <div className="mt-4 flex items-center justify-between border-t border-border pt-3">
                       <span className="inline-flex items-center gap-1.5 text-xs text-muted-foreground">
                         <GraduationCap className="size-3.5 text-primary" />
-                        {person.years} yil tajriba
+                        {person.years} {dict.fleet.yearsExperience}
                       </span>
                       <span className="text-[11px] font-medium text-primary">
-                        {person.note}
+                        {info.note}
                       </span>
                     </div>
                   </TiltCard>
                 </Reveal>
-              ))}
+                );
+              })}
             </div>
           </div>
         </div>

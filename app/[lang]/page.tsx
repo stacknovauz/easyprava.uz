@@ -1,3 +1,4 @@
+import { notFound } from "next/navigation";
 import { AppSection } from "@/components/landing/app-section";
 import { Courses } from "@/components/landing/courses";
 import { Enroll } from "@/components/landing/enroll";
@@ -17,31 +18,38 @@ import { Stats } from "@/components/landing/stats";
 import { Testimonials } from "@/components/landing/testimonials";
 import { WhyUs } from "@/components/landing/why-us";
 import { WordMarquee } from "@/components/landing/word-marquee";
+import { getDictionary } from "./dictionaries";
+import { isLocale } from "@/lib/i18n/config";
 
-export default function Home() {
+export default async function Home({ params }: PageProps<"/[lang]">) {
+  const { lang } = await params;
+  if (!isLocale(lang)) notFound();
+
+  const dict = await getDictionary(lang);
+
   return (
     <>
       <Preloader />
-      <Header />
+      <Header dict={dict} locale={lang} />
       <main className="flex-1">
-        <Hero />
-        <Stats />
-        <ReformBanner />
-        <Courses />
-        <WordMarquee />
-        <Packages />
-        <Process />
-        <WhyUs />
-        <AppSection />
-        <Lessons />
-        <ExamQuiz />
-        <Fleet />
-        <Instructor />
-        <Testimonials />
-        <Enroll />
-        <Faq />
+        <Hero dict={dict} />
+        <Stats dict={dict} />
+        <ReformBanner dict={dict} />
+        <Courses dict={dict} />
+        <WordMarquee dict={dict} />
+        <Packages dict={dict} />
+        <Process dict={dict} />
+        <WhyUs dict={dict} />
+        <AppSection dict={dict} />
+        <Lessons dict={dict} />
+        <ExamQuiz dict={dict.quiz} />
+        <Fleet dict={dict} />
+        <Instructor dict={dict} />
+        <Testimonials dict={dict} />
+        <Enroll dict={dict} />
+        <Faq dict={dict.faq} />
       </main>
-      <Footer />
+      <Footer dict={dict} />
     </>
   );
 }

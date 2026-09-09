@@ -3,27 +3,25 @@
 import { useState } from "react";
 import { ChevronDown } from "lucide-react";
 import { Reveal } from "@/components/landing/reveal";
-import { FAQ_ITEMS } from "@/lib/content";
+import type { Dictionary } from "@/lib/i18n/types";
 import { cn } from "@/lib/utils";
 
-
-
-export function Faq() {
+export function Faq({ dict }: { dict: Dictionary["faq"] }) {
   const [open, setOpen] = useState<number | null>(0);
 
   return (
     <section id="faq" className="relative scroll-mt-20 py-24 sm:py-32">
       <div className="mx-auto max-w-3xl px-4 sm:px-6">
         <Reveal className="text-center">
-          <span className="eyebrow">Savol-javob</span>
+          <span className="eyebrow">{dict.eyebrow}</span>
           <h2 className="font-heading mt-4 text-balance text-3xl font-bold leading-[1.1] tracking-tight sm:text-[2.75rem]">
-            Ko&apos;p so&apos;raladigan{" "}
-            <span className="text-gradient">savollar</span>
+            {dict.title}{" "}
+            <span className="text-gradient">{dict.titleAccent}</span>
           </h2>
         </Reveal>
 
         <div className="mt-12 space-y-3">
-          {FAQ_ITEMS.map((item, i) => {
+          {dict.items.map((item, i) => {
             const isOpen = open === i;
             return (
               <Reveal key={item.question} delay={i * 0.06}>

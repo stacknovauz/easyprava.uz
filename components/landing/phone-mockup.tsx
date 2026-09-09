@@ -7,13 +7,20 @@ import {
   Home,
   User,
 } from "lucide-react";
+import type { Dictionary } from "@/lib/i18n/types";
 import { cn } from "@/lib/utils";
 
 /**
  * CSS-built iPhone frame showing a recreation of the actual EasyPrava app
  * home screen (hero card, quick access, stats, liquid-glass tab bar).
  */
-export function PhoneMockup({ className }: { className?: string }) {
+export function PhoneMockup({
+  dict,
+  className,
+}: {
+  dict: Dictionary["app"]["mockup"];
+  className?: string;
+}) {
   return (
     <div className={cn("relative w-fit mx-auto", className)} aria-hidden="true">
       {/* ambient glow behind the phone */}
@@ -28,8 +35,8 @@ export function PhoneMockup({ className }: { className?: string }) {
           <CheckCircle2 className="size-4" />
         </span>
         <div className="text-left">
-          <p className="text-xs font-semibold">7-bilet — 18/20</p>
-          <p className="text-[11px] text-muted-foreground">Imtihondan o&apos;tdingiz!</p>
+          <p className="text-xs font-semibold">{dict.chipTicket}</p>
+          <p className="text-[11px] text-muted-foreground">{dict.chipTicketSub}</p>
         </div>
       </div>
 
@@ -43,8 +50,8 @@ export function PhoneMockup({ className }: { className?: string }) {
           <BarChart3 className="size-4" />
         </span>
         <div className="text-left">
-          <p className="text-xs font-semibold">94% to&apos;g&apos;ri javob</p>
-          <p className="text-[11px] text-muted-foreground">So&apos;nggi 7 kun</p>
+          <p className="text-xs font-semibold">{dict.chipAccuracy}</p>
+          <p className="text-[11px] text-muted-foreground">{dict.chipAccuracySub}</p>
         </div>
       </div>
 
@@ -58,8 +65,8 @@ export function PhoneMockup({ className }: { className?: string }) {
           <Flame className="size-4" />
         </span>
         <div className="text-left">
-          <p className="text-xs font-semibold">12 kunlik seriya</p>
-          <p className="text-[11px] text-muted-foreground">Har kuni mashq</p>
+          <p className="text-xs font-semibold">{dict.chipStreak}</p>
+          <p className="text-[11px] text-muted-foreground">{dict.chipStreakSub}</p>
         </div>
       </div>
 
@@ -73,7 +80,7 @@ export function PhoneMockup({ className }: { className?: string }) {
             {/* app header */}
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-[11px] text-muted-foreground">Xush kelibsiz 👋</p>
+                <p className="text-[11px] text-muted-foreground">{dict.greeting}</p>
                 <p className="font-heading text-sm font-bold">EasyPrava</p>
               </div>
               <div className="flex size-8 items-center justify-center rounded-full bg-primary/12 text-primary">
@@ -85,41 +92,40 @@ export function PhoneMockup({ className }: { className?: string }) {
             <div className="mt-4 rounded-2xl bg-[#1e6fe8] p-4 text-white shadow-lg shadow-[#1e6fe8]/30">
               <p className="font-heading text-sm font-bold">EasyPrava</p>
               <p className="mt-1 text-[11px] leading-relaxed text-white/85">
-                Haydovchilik guvohnomasiga tayyorlanish — testlar va darslar bir
-                joyda
+                {dict.tagline}
               </p>
             </div>
 
             {/* quick access */}
-            <p className="mt-4 text-xs font-semibold">Tez o&apos;tish</p>
+            <p className="mt-4 text-xs font-semibold">{dict.quickAccess}</p>
             <div className="mt-2 grid grid-cols-2 gap-2">
               <div className="rounded-2xl border border-border bg-card p-3">
                 <span className="flex size-8 items-center justify-center rounded-xl bg-primary/12 text-primary">
                   <ClipboardList className="size-4" />
                 </span>
-                <p className="mt-2 text-xs font-semibold">Testlar</p>
+                <p className="mt-2 text-xs font-semibold">{dict.testsTitle}</p>
                 <p className="mt-0.5 text-[10px] leading-snug text-muted-foreground">
-                  Imtihon biletlarini yeching
+                  {dict.testsText}
                 </p>
               </div>
               <div className="rounded-2xl border border-border bg-card p-3">
                 <span className="flex size-8 items-center justify-center rounded-xl bg-primary/12 text-primary">
                   <BookOpen className="size-4" />
                 </span>
-                <p className="mt-2 text-xs font-semibold">Darslar</p>
+                <p className="mt-2 text-xs font-semibold">{dict.lessonsTitle}</p>
                 <p className="mt-0.5 text-[10px] leading-snug text-muted-foreground">
-                  Yo&apos;l harakati qoidalari
+                  {dict.lessonsText}
                 </p>
               </div>
             </div>
 
             {/* stats */}
-            <p className="mt-4 text-xs font-semibold">Statistika</p>
+            <p className="mt-4 text-xs font-semibold">{dict.statsTitle}</p>
             <div className="mt-2 grid grid-cols-3 gap-2">
               {[
-                { value: "128", label: "Yechilgan" },
-                { value: "94%", label: "To'g'ri" },
-                { value: "14/20", label: "Darslar" },
+                { value: "128", label: dict.statSolved },
+                { value: "94%", label: dict.statCorrect },
+                { value: "14/20", label: dict.statLessons },
               ].map((stat) => (
                 <div
                   key={stat.label}
@@ -137,19 +143,19 @@ export function PhoneMockup({ className }: { className?: string }) {
             <div className="mt-auto flex items-center justify-between rounded-full border border-border bg-card/70 px-5 py-2.5 shadow-lg backdrop-blur">
               <span className="flex flex-col items-center gap-0.5 text-primary">
                 <Home className="size-4" />
-                <span className="text-[9px] font-medium">Bosh sahifa</span>
+                <span className="text-[9px] font-medium">{dict.tabHome}</span>
               </span>
               <span className="flex flex-col items-center gap-0.5 text-muted-foreground">
                 <ClipboardList className="size-4" />
-                <span className="text-[9px]">Testlar</span>
+                <span className="text-[9px]">{dict.tabTests}</span>
               </span>
               <span className="flex flex-col items-center gap-0.5 text-muted-foreground">
                 <BookOpen className="size-4" />
-                <span className="text-[9px]">Darslar</span>
+                <span className="text-[9px]">{dict.tabLessons}</span>
               </span>
               <span className="flex flex-col items-center gap-0.5 text-muted-foreground">
                 <User className="size-4" />
-                <span className="text-[9px]">Profil</span>
+                <span className="text-[9px]">{dict.tabProfile}</span>
               </span>
             </div>
           </div>

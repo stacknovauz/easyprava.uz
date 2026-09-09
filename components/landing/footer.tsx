@@ -1,24 +1,18 @@
 import { ArrowUp, Mail, MapPin, Phone, Send } from "lucide-react";
 import { Logo } from "@/components/logo";
 import { BRANCHES, CONTACT } from "@/lib/content";
+import type { Dictionary } from "@/lib/i18n/types";
 
 const PAGE_LINKS = [
-  { href: "#kurslar", label: "Kurslar va narxlar" },
-  { href: "#paketlar", label: "B toifa paketlari" },
-  { href: "#jarayon", label: "Jarayon" },
-  { href: "#ilova", label: "EasyPrava ilovasi" },
-  { href: "#avtopark", label: "Avtopark" },
-  { href: "#faq", label: "Savol-javob" },
+  "#kurslar",
+  "#paketlar",
+  "#jarayon",
+  "#ilova",
+  "#avtopark",
+  "#faq",
 ];
 
-const APP_LINKS = [
-  { href: "#kurslar", label: "A va A1 toifa" },
-  { href: "#kurslar", label: "B toifa" },
-  { href: "#kurslar", label: "BC va C toifa" },
-  { href: "#kurslar", label: "D toifa" },
-];
-
-export function Footer() {
+export function Footer({ dict }: { dict: Dictionary }) {
   return (
     <footer id="aloqa" className="relative scroll-mt-20 overflow-hidden border-t border-border">
       <div className="mx-auto max-w-7xl px-4 pt-16 sm:px-6">
@@ -26,24 +20,22 @@ export function Footer() {
           <div>
             <Logo className="h-7 sm:h-8" />
             <p className="mt-4 max-w-sm text-sm leading-relaxed text-muted-foreground">
-              EasyPrava — Toshkentdagi litsenziyalangan haydovchilik o&apos;quv
-              markazi. A, B, BC, C va D toifalari bo&apos;yicha tayyorlaymiz —
-              nazariya o&apos;z ilovamizda, amaliyot o&apos;z avtodromimizda.
+              {dict.footer.about}
             </p>
           </div>
 
           <div>
             <h3 className="font-heading text-sm font-bold uppercase tracking-wider text-muted-foreground">
-              Sahifalar
+              {dict.footer.pagesTitle}
             </h3>
             <ul className="mt-4 space-y-2.5">
-              {PAGE_LINKS.map((link) => (
-                <li key={link.href}>
+              {PAGE_LINKS.map((href, i) => (
+                <li key={href}>
                   <a
-                    href={link.href}
+                    href={href}
                     className="text-sm text-muted-foreground transition-colors hover:text-foreground"
                   >
-                    {link.label}
+                    {dict.footer.pageLinks[i]}
                   </a>
                 </li>
               ))}
@@ -52,16 +44,16 @@ export function Footer() {
 
           <div>
             <h3 className="font-heading text-sm font-bold uppercase tracking-wider text-muted-foreground">
-              Toifalar
+              {dict.footer.categoriesTitle}
             </h3>
             <ul className="mt-4 space-y-2.5">
-              {APP_LINKS.map((link) => (
-                <li key={link.label}>
+              {dict.footer.categoryLinks.map((label) => (
+                <li key={label}>
                   <a
-                    href={link.href}
+                    href="#kurslar"
                     className="text-sm text-muted-foreground transition-colors hover:text-foreground"
                   >
-                    {link.label}
+                    {label}
                   </a>
                 </li>
               ))}
@@ -70,7 +62,7 @@ export function Footer() {
           </div>
           <div>
             <h3 className="font-heading text-sm font-bold uppercase tracking-wider text-muted-foreground">
-              Aloqa
+              {dict.footer.contactTitle}
             </h3>
             <ul className="mt-4 space-y-2.5">
               <li>
@@ -104,11 +96,11 @@ export function Footer() {
               </li>
               {BRANCHES.slice(0, 2).map((branch) => (
                 <li
-                  key={branch.name}
+                  key={branch.id}
                   className="flex items-start gap-2 text-sm text-muted-foreground"
                 >
                   <MapPin className="mt-0.5 size-3.5 shrink-0 text-primary" />
-                  {branch.address}
+                  {dict.enroll.branches[branch.id].address}
                 </li>
               ))}
             </ul>
@@ -122,17 +114,17 @@ export function Footer() {
 
         <div className="flex flex-col items-center justify-between gap-4 border-t border-border py-6 sm:flex-row">
           <p className="text-xs text-muted-foreground">
-            © 2026 EasyPrava. Barcha huquqlar himoyalangan.
+            {dict.footer.rights}
           </p>
           <div className="flex items-center gap-5">
             <p className="text-xs text-muted-foreground">
-              StackNova tomonidan ishlab chiqilgan
+              {dict.footer.builtBy}
             </p>
             <a
               href="#top"
               className="inline-flex items-center gap-1.5 text-xs font-medium text-muted-foreground transition-colors hover:text-foreground"
             >
-              Tepaga
+              {dict.footer.toTop}
               <ArrowUp className="size-3.5" />
             </a>
           </div>
