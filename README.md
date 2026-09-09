@@ -17,7 +17,7 @@ student and instructor mobile apps.
 |---|---|
 | Prices, courses, FAQ, testimonials, branches, contacts | `lib/content.ts` |
 | Page sections | `components/landing/` |
-| Brand marks (traced from `public/logo.jpg`) | `components/logo.tsx` |
+| Brand lockup (traced from `public/logo2.jpg`) | `components/logo.tsx` |
 | Design tokens (`--primary`, `--brand-yellow`, …) | `app/globals.css` |
 | Favicon / apple icon / OG image | `app/icon.svg`, `app/apple-icon.png`, `app/opengraph-image.png` |
 | Enrolment form endpoint | `app/api/lead/route.ts` |
